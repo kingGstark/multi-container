@@ -42,7 +42,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: docker build -t kinggstark/multi-client  -f /client/Dockerfile.dev .
+      - run: docker build -t kinggstark/multi-client  -f Dockerfile.dev ./client
       - run: docker run -e CI=true kinggstark/multi-client npm test
 
   build:
