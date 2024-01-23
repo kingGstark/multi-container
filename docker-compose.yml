@@ -4,7 +4,7 @@ services:
     image: "kinggstark/multi-client"
     mem_limit: 128m
     hostname: client
-  server:
+  api:
     image: "kinggstark/multi-server"
     mem_limit: 128m
     hostname: api
