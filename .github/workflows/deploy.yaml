@@ -29,6 +29,23 @@ jobs:
       - run: docker push kinggstark/multi-worker
       - run: docker push kinggstark/multi-nginx
 
+  deploy:
+      needs: build
+      runs-on: ubuntu-latest
+      steps:
+        - name: Generate deployment package
+          run: zip -r deploy.zip . -x '*.git*'
 
+        - name: Deploy to EB
+          uses: einaregilsson/beanstalk-deploy@v18
+          with:
+            aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
+            aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
+            application_name: multi-docker
+            environment_name: Multi-docker-env
+            existing_bucket_name: elasticbeanstalk-us-east-2-311982204125
+            region: us-east-2
+            version_label: ${{ github.sha }}
+            deployment_package: deploy.zip
 
       
