@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-      - run: docker build -t kinggstark/multi-client  -f Dockerfile.dev ./client
+      - run: docker build -t kinggstark/multi-client  ./client
       - run: docker run -e CI=true kinggstark/multi-client npm test
 
   build:
@@ -30,3 +30,5 @@ jobs:
       - run: docker push kinggstark/multi-nginx
 
 
+
+      
